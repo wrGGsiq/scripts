@@ -5,10 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Arquivos do Repositório</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
+        }
+        .list-group-item {
+            background: #232323;
+            border: none;
+            color: #ffffff;
+        }
+        .list-group-item a {
+            text-decoration: none;
+        }
+        .text-warning {
+            color: #f1c40f !important;
+        }
+        .text-primary {
+            color: #3498db !important;
+        }
+    </style>
     <script>
         document.addEventListener("DOMContentLoaded", async function() {
-            const owner = "wrGGsiq"; 
-            const repo = "scriptsGG"; 
+            const owner = "wrGGsiq";
+            const repo = "scriptsGG";
             const url = `https://api.github.com/repos/${owner}/${repo}/contents/`;
             
             try {
@@ -17,6 +45,7 @@
                 
                 if (Array.isArray(data)) {
                     const fileList = document.getElementById("file-list");
+                    fileList.innerHTML = ""; // Limpar antes de adicionar novos elementos
                     data.forEach(file => {
                         if (file.type === "file") { // Filtrar apenas arquivos
                             const fileType = file.name.endsWith(".js") ? "text-warning" : "text-primary";
@@ -39,8 +68,8 @@
         });
     </script>
 </head>
-<body class="bg-light">
-    <div class="container mt-5">
+<body>
+    <div class="container">
         <h2 class="text-center">Arquivos do Repositório</h2>
         <ul id="file-list" class="list-group mt-3"></ul>
         <p id="error" class="text-danger mt-3 text-center"></p>
